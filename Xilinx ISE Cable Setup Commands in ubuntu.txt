@@ -1,0 +1,30 @@
+sudo ./xsetup    
+sudo -i
+
+cd /etc/apt/sources.list.d
+echo "deb http://old-releases.ubuntu.com/ubuntu/ raring main restricted universe multiverse" >ia32-libs-raring.list
+
+apt-get update
+##apt-get install ia32-libs
+sudo dpkg --add-architecture i386
+sudo apt-get update 
+##sudo apt-get install ia32-libs
+##dpkg --add-architecture i386
+##apt-get update
+apt-get install libc6:i386 libstdc++6:i386
+sudo rm ia32-libs-raring.list
+sudo apt-get install fxload gitk git-gui build-essential libc6-dev-i386
+sudo apt-get install libusb-dev
+sudo git clone git://git.zerfleddert.de/usb-driver
+ls
+##sudo make lib32
+##/usr/bin/ld: cannot find -lusb
+##sudo make
+cd usb-driver/
+ls
+sudo make
+sudo make lib32
+./setup_pcusb /opt/Xilinx/14.7/ISE_DS/ISE/
+cd /lib/x86_64-linux-gnu/
+sudo ln -s libusb-0.1.so.4 libusb.so
+exit

@@ -1,0 +1,6 @@
+{
+	"shell_cmd": "make all",
+	"working_dir": "W:\\working\\ProjectDir_STM32\\Debug",
+	"file_regex": "^(.*):([0-9]*):([0-9]*):(.+)$",
+	"quiet": true,
+}
