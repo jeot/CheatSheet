@@ -1,0 +1,20 @@
+## rename this file to "config" and put it in ~/.ssh/ directory.
+
+### default for all ##
+Host *
+     ForwardAgent no
+     ForwardX11 no
+     ForwardX11Trusted yes
+     User shamim
+     Port 22
+     Protocol 2
+     ServerAliveInterval 60
+     ServerAliveCountMax 30
+ 
+## override as per host ##
+## git @ gitlab.com (for windows) ##
+Host gitlab.com
+     HostName gitlab.com
+     User git
+     IdentityFile ~/.ssh/your_open_ssh_private_key
+     
