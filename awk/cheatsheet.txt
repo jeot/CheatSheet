@@ -1,0 +1,47 @@
+# use pattern for each line (the () is optional!)
+# awk '(PATTERN1){statement...} (PATTERN2){statement...} (PATTERN3){statement...}' file
+# awk 'PATTERN1{statement...} PATTERN2{statement...} PATTERN3{statement...}' file
+# the empty pattern defaults to all lines!
+
+awk '(NR==1){print "first line: " $0} (NR==2){print "second line: " $0}' temp.txt
+
+
+# print hello for each line of text file
+awk '{print "hello"}' temp.txt
+
+# $0: gets the entire line
+awk '{print "hello" $0}' temp.txt
+
+# seperate each word in line with space and access
+awk '{print "hello" $1 ", goodbye " $2}' temp.txt
+
+# operate some operation on numbers
+awk '{ print ($1 + 10)/2.8 " done!" }' temp.txt
+
+# operate some operation on numbers with some conditions
+awk '{ print ($2 == "F" ? ($1-32)/1.8 : $1) " C" }' temp.txt
+
+# do custom operation on different record lines
+awk 'NR==1 {print "temp unit"}; NR>1 { print ($2 == "F" ? ($1-32)/1.8 : $1) " C" }' temp.txt
+
+# the first record number (line) will output as is
+awk 'NR==1; NR>1 { print ($2 == "F" ? ($1-32)/1.8 : $1) " C" }' temp.txt
+
+# use printf()
+awk 'NR==1; NR>1 { printf("%.1f %c\n"), ($2 == "F" ? ($1-32)/1.8 : $1), "C" }' temp.txt
+
+# print entire line of 4 and 5, don't print other lines
+awk 'NR==4; NR==5{print} NR>2{}' temp.txt
+
+# regex match with ~ example: match all animals that end with letters 'se'
+# the () and $0 and ; is optinal
+awk '($0 ~ /se$/){print}' animals.txt
+awk '($0 ~ /se$/);' animals.txt
+awk '$0 ~ /se$/;' animals.txt
+awk '/se$/' animals.txt
+
+# substitute
+awk '{gsub(/se$/, "zzzzzz"); print}' animals.txt
+
+# do something once at begining and ending of awk command
+awk 'BEGIN{print "hello world"} END{print "goodbye"}' temp.txt
